@@ -46,16 +46,18 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const location = useLocation();
   const authAxios = useAuthAxios();
 
+  const base_API = import.meta.env.VITE_BE_API;
+
   // APIs
-  const coreAPI = 'http://localhost:9999';
-  const authAPI = 'http://localhost:9999/auth';
-  const userAPI = 'http://localhost:9999/users/admin';
-  const shelterAPI = 'http://localhost:9999/shelters/admin';
-  const donationAPI = 'http://localhost:9999/donations/admin';
-  const blogAPI = 'http://localhost:9999/blogs/admin';
-  const reportAPI = 'http://localhost:9999/reports/admin';
-  const breedAPI = 'http://localhost:9999/breeds/admin';
-  const speciesAPI = 'http://localhost:9999/species/admin';
+  const coreAPI = base_API;
+  const authAPI = `${base_API}/auth`;
+  const userAPI = `${base_API}/users/admin`;
+  const shelterAPI = `${base_API}/shelters/admin`;
+  const donationAPI = `${base_API}/donations/admin`;
+  const blogAPI = `${base_API}/blogs/admin`;
+  const reportAPI = `${base_API}/reports/admin`;
+  const breedAPI = `${base_API}/breeds/admin`;
+  const speciesAPI = `${base_API}/species/admin`;
 
 
   const login = (accessToken: string, userData: User) => {
