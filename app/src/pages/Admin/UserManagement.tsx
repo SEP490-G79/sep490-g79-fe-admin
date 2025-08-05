@@ -362,19 +362,15 @@ const UserManagement = () => {
         },
         cell: ({ row }) => {
           const status = row.original.status;
-          let color = "";
           let statusTiengViet = "";
           if (status === "active") {
             statusTiengViet = "Đã kích hoạt";
-            color = "text-green-500 font-semibold uppercase";
             return <Badge variant="default">{statusTiengViet}</Badge>;
           } else if (status === "verifying") {
             statusTiengViet = "Chờ kích hoạt";
-            color = "text-yellow-500 font-semibold uppercase";
             return <Badge variant="secondary">{statusTiengViet}</Badge>;
           } else {
             statusTiengViet = "Bị cấm";
-            color = "text-destructive font-semibold uppercase";
             return <Badge variant="destructive">{statusTiengViet}</Badge>;
           }
         },
