@@ -19,7 +19,7 @@ interface tokenData{
 const useAuthAxios = () => {
   let accessToken = localStorage.getItem("accessToken");
   const navigate = useNavigate();
-  const { logout } = useContext(AppContext);
+  const { logout, coreAPI } = useContext(AppContext);
 
   const authAxios = axios.create({
     timeout: 7000,
@@ -45,14 +45,14 @@ const useAuthAxios = () => {
             try {
                 // Lấy refresh token trước khi tạo access token mới
                 const refreshTokenRes = await axios.post(
-                  "http://localhost:9999/auth/getRefreshToken",
+                  `${coreAPI}/auth/getRefreshToken`,
                   { id: tokenData.id }
                 );
                 if (refreshTokenRes.data.length > 1) {
                   try {
                     // Lấy access token mới từ backend
                     const newAccessToken = await axios.post(
-                      "http://localhost:9999/auth/refresh",
+                      `${coreAPI}/auth/refresh`,
                       { refreshToken: refreshTokenRes.data, id: tokenData.id }
                     );
 
