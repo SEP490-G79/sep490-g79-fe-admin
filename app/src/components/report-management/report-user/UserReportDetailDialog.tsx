@@ -1,6 +1,6 @@
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import type { UserReportDetailDialog } from '@/types/DetailDialog';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Loader2Icon } from 'lucide-react';
 
@@ -65,8 +65,9 @@ const UserReportDetailDialogUI = ({
               <div className="col-span-4 space-y-3">
                 <div>
                   <p className="font-medium">Ảnh đại diện</p>
-                  <Avatar className="w-20 h-20 mt-1">
+                  <Avatar className="w-20 h-20 mt-1 ring ring-2 ring-primary">
                     <AvatarImage src={dialogDetail.detail?.user?.avatar} />
+                    <AvatarFallback>{dialogDetail.detail?.user?.fullName && dialogDetail.detail?.user?.fullName[0]}</AvatarFallback>
                   </Avatar>
                 </div>
                 <div>
@@ -112,10 +113,12 @@ const UserReportDetailDialogUI = ({
                 <div>
                   <p className="font-medium">Tài khoản báo cáo</p>
                   <div className="flex items-center gap-2">
-                    <Avatar className="w-8 h-8">
+                    <Avatar className="w-8 h-8 ring ring-2 ring-primary">
                       <AvatarImage
                         src={dialogDetail.detail?.reportedBy?.avatar}
+                        alt={dialogDetail.detail?.reportedBy?.fullName}
                       />
+                      <AvatarFallback>{dialogDetail.detail?.reportedBy?.fullName && dialogDetail.detail?.reportedBy?.fullName[0]}</AvatarFallback>
                     </Avatar>
                     <p>
                       {dialogDetail.detail?.reportedBy?.fullName || "Không có"}
@@ -143,10 +146,12 @@ const UserReportDetailDialogUI = ({
                       <div>
                         <p className="font-medium">Duyệt bởi</p>
                         <div className="flex gap-2">
-                          <Avatar className="w-8 h-8">
+                          <Avatar className="w-8 h-8 ring ring-2 ring-primary">
                             <AvatarImage
                               src={dialogDetail.detail?.reviewedBy?.avatar}
+                              alt={dialogDetail.detail?.reviewedBy?.fullName + " avatar"}
                             />
+                            <AvatarFallback>{dialogDetail.detail?.reviewedBy?.fullName && dialogDetail.detail?.reviewedBy?.fullName[0]}</AvatarFallback>
                           </Avatar>
                           <p className="my-auto">
                             {dialogDetail.detail?.reviewedBy?.fullName ||

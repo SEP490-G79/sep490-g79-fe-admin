@@ -23,8 +23,8 @@ import { z } from 'zod';
 
 const breedSchema = z.object({
     speciesId: z.string().min(2, "Vui lòng chọn loài!"),
-    name: z.string().min(2, "Tên giống không được để trống !").max(20, "Tên giống không được quá 20 kí tự !"),
-    description: z.string().max(100, "Miêu tả loài không được quá 100 kí tự!")
+    name: z.string().min(2, "Tên giống không được để trống !").max(100, "Tên giống không được quá 100 kí tự !"),
+    description: z.string().max(1000, "Miêu tả loài không được quá 1000 kí tự!")
     .optional()
     .or(z.literal("")), // cho phép chuỗi rỗng
   })

@@ -22,12 +22,12 @@ const speciesSchema = z.object({
     .string()
     .trim()
     .min(2, "Tên loài không được để trống!")
-    .max(20, "Tên loài không được quá 20 kí tự!"),
+    .max(100, "Tên loài không được quá 100 kí tự!"),
 
   description: z
     .string()
     .trim()
-    .max(100, "Miêu tả loài không được quá 100 kí tự!")
+    .max(1000, "Miêu tả loài không được quá 1000 kí tự!")
     .optional()
     .or(z.literal("")), // cho phép chuỗi rỗng
 });

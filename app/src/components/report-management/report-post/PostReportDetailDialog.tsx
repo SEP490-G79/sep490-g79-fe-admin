@@ -1,6 +1,6 @@
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import type { PostReportDetailDialog } from '@/types/DetailDialog';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Loader2Icon } from 'lucide-react';
 import { useState } from 'react';
@@ -71,10 +71,12 @@ const PostReportDetailDialogUI = ({
                 <div>
                   <p className="font-medium">Người đăng</p>
                   <div className="flex items-center gap-2">
-                    <Avatar className="w-8 h-8">
+                    <Avatar className="w-8 h-8 ring ring-2 ring-primary">
                       <AvatarImage
                         src={dialogDetail.detail?.post?.createdBy?.avatar}
+                        alt={dialogDetail.detail?.post?.createdBy?.fullName + " avatar"}
                       />
+                      <AvatarFallback>{dialogDetail.detail?.post?.createdBy?.fullName && dialogDetail.detail?.post?.createdBy?.fullName[0]}</AvatarFallback>
                     </Avatar>
                     <p>{dialogDetail.detail?.post?.createdBy?.fullName}</p>
                   </div>
@@ -165,10 +167,12 @@ const PostReportDetailDialogUI = ({
                 <div>
                   <p className="font-medium">Người báo cáo</p>
                   <div className="flex items-center gap-2">
-                    <Avatar className="w-8 h-8">
+                    <Avatar className="w-8 h-8 ring ring-2 ring-primary">
                       <AvatarImage
                         src={dialogDetail.detail?.reportedBy?.avatar}
+                        alt={dialogDetail.detail?.reportedBy?.fullName + " avatar"}
                       />
+                      <AvatarFallback>{dialogDetail.detail?.reportedBy?.fullName && dialogDetail.detail?.reportedBy?.fullName[0]}</AvatarFallback>
                     </Avatar>
                     <p>{dialogDetail.detail?.reportedBy?.fullName}</p>
                   </div>
@@ -192,10 +196,12 @@ const PostReportDetailDialogUI = ({
                       <div>
                         <p className="font-medium">Duyệt bởi</p>
                         <div className="flex gap-2 justify-end">
-                          <Avatar className="w-8 h-8">
+                          <Avatar className="w-8 h-8 ring ring-2 ring-primary">
                             <AvatarImage
                               src={dialogDetail.detail?.reviewedBy?.avatar}
+                              alt={dialogDetail.detail?.reviewedBy?.fullName + " avatar"}
                             />
+                            <AvatarFallback>{dialogDetail.detail?.reviewedBy?.fullName && dialogDetail.detail?.reviewedBy?.fullName[0]}</AvatarFallback>
                           </Avatar>
                           <p className="my-auto">
                             {dialogDetail.detail?.reviewedBy?.fullName ||

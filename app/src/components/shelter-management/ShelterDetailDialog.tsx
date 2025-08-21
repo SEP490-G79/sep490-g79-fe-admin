@@ -7,7 +7,7 @@ import {
   DialogDescription
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { Avatar } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CalendarIcon, HashIcon, MailIcon, MapPinIcon, PhoneIcon, ScrollText } from "lucide-react";
 import type { Shelter } from "@/types/Shelter";
 import { DropdownMenuItem } from "../ui/dropdown-menu";
@@ -30,14 +30,9 @@ const ShelterDetailDialog = ({ shelter } : {shelter: Shelter}) => {
         </DialogHeader>
 
         <div className="flex flex-col items-center gap-2">
-          <Avatar className="w-24 h-24">
-            <img
-              src={
-                shelter?.avatar ||
-                "https://maunhi.com/wp-content/uploads/2025/06/avatar-mac-dinh-facebook-17.jpg"
-              }
-              alt="avatar"
-            />
+          <Avatar className="w-24 h-24 ring ring-2 ring-primary">
+            <AvatarImage src={shelter?.avatar} alt="shelter avatar"/>
+            <AvatarFallback>{shelter?.name && shelter?.name[0]}</AvatarFallback>
           </Avatar>
           <h2 className="text-lg font-semibold">{shelter?.name}</h2>
           <Badge
