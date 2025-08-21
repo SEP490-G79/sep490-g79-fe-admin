@@ -1,5 +1,5 @@
 import { DataTable } from '@/components/data-table'
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
@@ -127,8 +127,9 @@ const AllBlogReports = () => {
           cell: ({ row }) => {
             return <p className='flex gap-2'>
               {row.original.blog && <>
-                <Avatar>
+                <Avatar className='ring ring-1 ring-primary'>
                   <AvatarImage src={row.original.blog?.thumbnail_url} alt={row.original.blog?.title} />
+                  <AvatarFallback>{row.original.blog?.title && row.original.blog?.title[0]}</AvatarFallback>
                 </Avatar>
                 <span className='my-auto max-w-20 truncate'>{row.original.blog?.title}</span>
               </>}
@@ -153,8 +154,9 @@ const AllBlogReports = () => {
           },
           cell: ({ row }) => {
             return <p className='flex gap-2'>
-              <Avatar>
+              <Avatar className='ring ring-1 ring-primary'>
                 <AvatarImage src={row.original.reportedBy.avatar} alt={row.original.reportedBy.fullName} />
+                <AvatarFallback>{row.original.reportedBy?.fullName && row.original.reportedBy?.fullName[0]}</AvatarFallback>
               </Avatar>
               <span className='my-auto'>{row.original.reportedBy.fullName}</span>
             </p>;

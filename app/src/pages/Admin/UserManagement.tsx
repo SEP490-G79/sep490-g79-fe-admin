@@ -1,6 +1,6 @@
 
 import { DataTable } from '@/components/data-table';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -207,11 +207,10 @@ const UserManagement = () => {
         accessorKey: "avatar",
         header: "Ảnh đại diện",
         cell: ({ row }) => (
-          <img
-            src={row.original.avatar}
-            alt={row.original.fullName}
-            className="h-10 w-10 rounded-full object-cover mx-auto"
-          />
+          <Avatar className='ring ring-2 ring-primary'>
+            <AvatarImage src={row.original.avatar} alt={row.original.fullName + " avatar"} />
+            <AvatarFallback>{row.original?.fullName && row.original?.fullName[0]}</AvatarFallback>
+          </Avatar>
         ),
       },
       {
@@ -656,10 +655,11 @@ const UserManagement = () => {
                                    <div className="flex flex-col">
                     <p className="font-medium px-2 py-1 h-fit">Avatar</p>
                     <p className="px-2 flex flex-row gap-2">
-                      <Avatar>
+                      <Avatar className='ring ring-2 ring-primary'>
                         <AvatarImage
                           src={dialogDetail.detail.avatar}
                         ></AvatarImage>
+                        <AvatarFallback>{dialogDetail.detail?.fullName && dialogDetail.detail?.fullName[0]}</AvatarFallback>
                       </Avatar>
                     </p>
                   </div>

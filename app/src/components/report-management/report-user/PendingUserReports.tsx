@@ -1,5 +1,5 @@
 import { DataTable } from '@/components/data-table'
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
@@ -106,8 +106,9 @@ const PendingUserReports = () => {
           cell: ({ row }) => {
             return <p className='flex gap-2'>
               {row.original.user && <>
-                <Avatar>
+                <Avatar className='ring ring-2 ring-primary'>
                   <AvatarImage src={row.original.user.avatar} alt={row.original.user.fullName} />
+                  <AvatarFallback>{row.original.user?.fullName && row.original.user?.fullName[0]}</AvatarFallback>
                 </Avatar>
                 <span className='my-auto'>{row.original.user.fullName}</span>
               </>}
@@ -132,8 +133,9 @@ const PendingUserReports = () => {
           },
           cell: ({ row }) => {
             return <p className='flex gap-2'>
-              <Avatar>
+              <Avatar className='ring ring-2 ring-primary'>
                 <AvatarImage src={row.original.reportedBy.avatar} alt={row.original.reportedBy.fullName} />
+                <AvatarFallback>{row.original.reportedBy?.fullName && row.original.reportedBy?.fullName[0]}</AvatarFallback>
               </Avatar>
               <span className='my-auto'>{row.original.reportedBy.fullName}</span>
             </p>;

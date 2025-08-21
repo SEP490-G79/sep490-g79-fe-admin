@@ -165,7 +165,7 @@ const DonationDetails = () => {
           cell: ({ row }) => (
             row.original.donor ?
             <p className='flex gap-2'>
-              <Avatar className='ring-2 ring-primary'>
+              <Avatar className='ring ring-2 ring-primary'>
                 <AvatarImage src={row.original.donor.avatar || "https://png.pngtree.com/png-vector/20190820/ourmid/pngtree-no-avatar-vector-isolated-on-white-background-png-image_1694546.jpg"} alt={row.original.donor.fullName} />
                 <AvatarFallback>Avt</AvatarFallback>
               </Avatar>
@@ -314,7 +314,7 @@ const DonationDetails = () => {
           cell: ({ row }) =>
             row.original.donor ? (
               <p className="flex gap-2">
-                <Avatar className='ring-2 ring-primary'>
+                <Avatar className='ring ring-2 ring-primary'>
                   <AvatarImage
                     src={
                       row.original.donor.avatar ||
@@ -322,12 +322,13 @@ const DonationDetails = () => {
                     }
                     alt={row.original.donor.fullName}
                   />
+                  <AvatarFallback>{row.original.donor?.fullName && row.original.donor?.fullName[0]}</AvatarFallback>
                 </Avatar>
                 <span className="my-auto">{row.original.donor.fullName}</span>
               </p>
             ) : (
               <div className='flex flex-row gap-2'>
-              <Avatar className='ring-2 ring-primary'>
+              <Avatar className='ring ring-2 ring-primary'>
                   <AvatarFallback>MTQ</AvatarFallback>
                 </Avatar>
                 <p className='my-auto'>Mạnh thường quân</p>
@@ -468,8 +469,9 @@ const DonationDetails = () => {
               <div className="space-y-4">
                 <div>
                   <p className="font-medium mb-1">Ảnh đại diện</p>
-                  <Avatar className="w-16 h-16">
+                  <Avatar className="w-16 h-16 ring ring-2 ring-primary">
                     <AvatarImage src={dialogDetail.detail.donor.avatar} />
+                    <AvatarFallback>{dialogDetail.detail.donor?.fullName && dialogDetail.detail.donor?.fullName[0]}</AvatarFallback>
                   </Avatar>
                 </div>
 
@@ -556,10 +558,11 @@ const DonationDetails = () => {
               <>
                 <div>
                   <p className="font-medium mb-1">Ảnh đại diện</p>
-                  <Avatar className="w-16 h-16">
+                  <Avatar className="w-16 h-16 ring ring-2 ring-primary">
                     <AvatarImage
                       src={summaryDialogDetail.detail.donor.avatar}
                     />
+                    <AvatarFallback>{summaryDialogDetail.detail.donor?.fullName && summaryDialogDetail.detail.donor?.fullName[0]}</AvatarFallback>
                   </Avatar>
                 </div>
 

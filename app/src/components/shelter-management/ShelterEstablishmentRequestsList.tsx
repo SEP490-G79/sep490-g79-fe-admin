@@ -99,9 +99,9 @@ const ShelterEstablishmentRequestsList = () => {
             );
           },
           cell: ({ row }) => {
-            return <div className='flex flex-row gap-2'><Avatar>
+            return <div className='flex flex-row gap-2'><Avatar className='ring ring-2 ring-primary'>
               <AvatarImage src={row.original?.createdBy.avatar} alt={'avaar nguoi dung '+ row.original.createdBy.fullName}></AvatarImage>
-              <AvatarFallback>User avatar</AvatarFallback>
+              <AvatarFallback>{row.original?.createdBy.fullName} && {row.original?.createdBy.fullName[0]}</AvatarFallback>
             </Avatar> <span className='my-auto'>{row.original.createdBy.fullName}</span></div>
           },
         },
@@ -360,10 +360,11 @@ const ShelterEstablishmentRequestsList = () => {
               <div>
                 <p className="font-medium px-2 py-1">Tạo bởi</p>
                 <div className="px-3 py-2 min-h-[38px] flex items-center gap-2">
-                  <Avatar>
+                  <Avatar className='ring ring-2 ring-primary'>
                     <AvatarImage
                       src={selectedShelterRequest?.createdBy?.avatar}
                     />
+                    <AvatarFallback>{selectedShelterRequest?.createdBy?.fullName && selectedShelterRequest?.createdBy?.fullName[0]}</AvatarFallback>
                   </Avatar>
                   <span>
                     {selectedShelterRequest?.createdBy?.fullName ?? "No data"}

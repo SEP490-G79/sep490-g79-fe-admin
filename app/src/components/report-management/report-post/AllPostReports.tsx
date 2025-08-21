@@ -1,5 +1,5 @@
 import { DataTable } from '@/components/data-table'
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
@@ -133,11 +133,12 @@ const AllPostReports = () => {
       cell: ({ row }) => {
         return (
           <p className="flex gap-2">
-            <Avatar>
+            <Avatar className='ring ring-2 ring-primary'>
               <AvatarImage
                 src={row.original.post?.photos[0]}
                 alt={row.original.post?.title}
               />
+              <AvatarFallback>{row.original.post?.title && row.original.post?.title[0]}</AvatarFallback>
             </Avatar>
             <span className="my-auto max-w-25 truncate">
               {row.original.post?.title}
@@ -181,11 +182,12 @@ const AllPostReports = () => {
       cell: ({ row }) => {
         return (
           <p className="flex gap-2">
-            <Avatar>
+            <Avatar className='ring ring-2 ring-primary'>
               <AvatarImage
                 src={row.original.reportedBy.avatar}
                 alt={row.original.reportedBy.fullName}
               />
+              <AvatarFallback>{row.original.reportedBy?.fullName && row.original.reportedBy?.fullName[0]}</AvatarFallback>
             </Avatar>
             <span className="my-auto max-w-20 truncate">
               {row.original.reportedBy.fullName}
