@@ -7,7 +7,7 @@ import AppContext from '@/context/AppContext';
 import type { ShelterEstablishmentRequestTableData } from '@/types/ShelterEstablishmentRequest';
 import useAuthAxios from '@/utils/authAxios';
 import type { ColumnDef } from '@tanstack/react-table';
-import { ArrowUpDown, Ellipsis, Loader2Icon } from 'lucide-react';
+import { ArrowUpDown, Ellipsis, Loader2Icon, ScrollText } from 'lucide-react';
 import { useContext, useEffect, useState } from 'react';
 import 'react-photo-view/dist/react-photo-view.css';
 import { toast } from 'sonner';
@@ -342,16 +342,15 @@ const ShelterEstablishmentRequestsList = () => {
             <div className="flex flex-col gap-3">
               <div>
                 <p className="font-medium px-2 py-1">Giấy phép hoạt động</p>
-                <div className="border border-input bg-muted text-muted-foreground rounded-md px-3 py-2 min-h-[38px] flex items-center">
+                <div className="px-2 py-2 min-h-[38px] flex items-center">
                   {selectedShelterRequest?.shelterLicenseURL ? (
-                    <a
-                      href={selectedShelterRequest.shelterLicenseURL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-500 underline"
+                    <Button
+                      onClick={() => window.open(selectedShelterRequest.shelterLicenseURL, "_blank")}
+                      variant="outline"
+                      className='cursor-pointer text-primary'
                     >
-                      Xem tài liệu
-                    </a>
+                      <ScrollText /> Xem giấy phép
+                    </Button>
                   ) : (
                     "No data"
                   )}
