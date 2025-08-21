@@ -8,9 +8,10 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
-import { MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
+import { MailIcon, MapPinIcon, PhoneIcon, ScrollText } from "lucide-react";
 import type { ShelterEstablishmentRequestTableData } from "@/types/ShelterEstablishmentRequest";
 import { DropdownMenuItem } from "../ui/dropdown-menu";
+import { Button } from "../ui/button";
 
 const ShelterDetailDialog = ({ shelter } : {shelter: ShelterEstablishmentRequestTableData}) => {
   return (
@@ -80,14 +81,13 @@ const ShelterDetailDialog = ({ shelter } : {shelter: ShelterEstablishmentRequest
           <p className="text-sm font-medium text-muted-foreground">
             Giấy phép hoạt động:
           </p>
-          <a
-            href={shelter?.shelterLicenseURL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 underline text-sm"
+          <Button
+            onClick={() => window.open(shelter?.shelterLicenseURL, "_blank")}
+            variant="outline"
+            className="cursor-pointer text-primary"
           >
-                 Xem tài liệu
-          </a>
+            <ScrollText /> Xem giấy phép
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

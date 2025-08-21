@@ -8,9 +8,10 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
-import { CalendarIcon, HashIcon, MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
+import { CalendarIcon, HashIcon, MailIcon, MapPinIcon, PhoneIcon, ScrollText } from "lucide-react";
 import type { Shelter } from "@/types/Shelter";
 import { DropdownMenuItem } from "../ui/dropdown-menu";
+import { Button } from "../ui/button";
 
 const ShelterDetailDialog = ({ shelter } : {shelter: Shelter}) => {
   return (
@@ -30,7 +31,13 @@ const ShelterDetailDialog = ({ shelter } : {shelter: Shelter}) => {
 
         <div className="flex flex-col items-center gap-2">
           <Avatar className="w-24 h-24">
-            <img src={shelter?.avatar || "https://maunhi.com/wp-content/uploads/2025/06/avatar-mac-dinh-facebook-17.jpg"} alt="avatar" />
+            <img
+              src={
+                shelter?.avatar ||
+                "https://maunhi.com/wp-content/uploads/2025/06/avatar-mac-dinh-facebook-17.jpg"
+              }
+              alt="avatar"
+            />
           </Avatar>
           <h2 className="text-lg font-semibold">{shelter?.name}</h2>
           <Badge
@@ -95,14 +102,13 @@ const ShelterDetailDialog = ({ shelter } : {shelter: Shelter}) => {
           <p className="text-sm font-medium text-muted-foreground">
             Giấy phép hoạt động:
           </p>
-          <a
-            href={shelter?.shelterLicenseURL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 underline text-sm"
+          <Button
+            onClick={() => window.open(shelter?.shelterLicenseURL, "_blank")}
+            variant="outline"
+            className="cursor-pointer text-primary"
           >
-                 Xem tài liệu
-          </a>
+            <ScrollText /> Xem giấy phép
+          </Button>
         </div>
       </DialogContent>
     </Dialog>
