@@ -142,7 +142,7 @@ const ShelterEstablishmentRequestsList = () => {
                   variant: "outline",
                 };
         
-                return <Badge variant={variant}>{label}</Badge>;
+                return <Badge variant="outline">{label}</Badge>;
               },
             },
         {
