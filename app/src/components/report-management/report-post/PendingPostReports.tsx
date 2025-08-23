@@ -211,7 +211,7 @@ const PendingPostReports = () => {
       cell: ({ row }) => {
         if (row.original.status === "pending") {
           return <Badge variant="default">Chờ xử lý</Badge>;
-        } else if (row.original.status === "aprroved") {
+        } else if (row.original.status === "approved") {
           return (
             <Badge variant="outline" className="bg-green-500 text-white">
               Chấp thuận
