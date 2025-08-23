@@ -23,18 +23,18 @@ function Header() {
             <span className="text-sm font-medium">Xin chào, {user?.fullName}</span>
             <DropdownMenu>
               <DropdownMenuTrigger className="cursor-pointer">
-                <Avatar className="h-8 w-8">
+                <Avatar className="h-8 w-8 ring ring-2 ring-primary">
                   <AvatarImage
                     src={user?.avatar || "https://github.com/shadcn.png"}
                     alt="adminAvatar"
                   />
-                  <AvatarFallback>AD</AvatarFallback>
+                  <AvatarFallback>{user?.fullName && user?.fullName[0]}</AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuLabel>Tài khoản của tôi</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Hồ sơ</DropdownMenuItem>
+                {/* <DropdownMenuItem>Hồ sơ</DropdownMenuItem> */}
                 <DropdownMenuItem onClick={() => {
                   logout();
                   setTimeout(() =>  navigate("/login"), 1000)

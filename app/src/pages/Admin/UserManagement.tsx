@@ -645,94 +645,95 @@ const UserManagement = () => {
         </div>
       </div>
 
-      <Dialog open={dialogDetail.isOpen}>
+      <Dialog open={dialogDetail.isOpen} onOpenChange={(open) => {
+        if(!open){
+          setDialogDetail({...dialogDetail, isOpen: false})
+        }
+      }}>
               <DialogContent className="max-w-[70vw]">
                 <DialogHeader>
                   <DialogTitle>Chi tiết tài khoản</DialogTitle>
                   <DialogDescription></DialogDescription>
                 </DialogHeader>
-                <div className="flex flex-col gap-3 py-3">
-                                   <div className="flex flex-col">
-                    <p className="font-medium px-2 py-1 h-fit">Avatar</p>
-                    <p className="px-2 flex flex-row gap-2">
-                      <Avatar className='ring ring-2 ring-primary'>
-                        <AvatarImage
-                          src={dialogDetail.detail.avatar}
-                        ></AvatarImage>
-                        <AvatarFallback>{dialogDetail.detail?.fullName && dialogDetail.detail?.fullName[0]}</AvatarFallback>
-                      </Avatar>
-                    </p>
+                <div className="flex gap-2">
+                  <div className='flex-1'>
+                    <div className="flex flex-col">
+                      <p className="font-medium px-2 py-1 h-fit">Avatar</p>
+                      <p className="px-2 flex flex-row gap-2">
+                        <Avatar className='ring ring-2 ring-primary'>
+                          <AvatarImage
+                            src={dialogDetail.detail.avatar}
+                          ></AvatarImage>
+                          <AvatarFallback>{dialogDetail.detail?.fullName && dialogDetail.detail?.fullName[0]}</AvatarFallback>
+                        </Avatar>
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-medium px-2 py-1">Họ và tên</p>
+                      <p className="px-2">
+                        {dialogDetail.detail !== null
+                          ? dialogDetail.detail.fullName
+                          : "No data"}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-medium px-2 py-1">Email</p>
+                      <p className="px-2">
+                        {dialogDetail.detail !== null
+                          ? dialogDetail.detail.email
+                          : "No data"}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-medium px-2 py-1">Số điện thoại</p>
+                      <p className="px-2">
+                        {dialogDetail.detail.phoneNumber
+                          ? dialogDetail.detail.phoneNumber
+                          : "Không có dữ liệu"}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-medium px-2 py-1">Họ và tên</p>
-                    <p className="px-2">
-                      {dialogDetail.detail !== null
-                        ? dialogDetail.detail.fullName
-                        : "No data"}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="font-medium px-2 py-1">Email</p>
-                    <p className="px-2">
-                      {dialogDetail.detail !== null
-                        ? dialogDetail.detail.email
-                        : "No data"}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="font-medium px-2 py-1">Số điện thoại</p>
-                    <p className="px-2">
-                      {dialogDetail.detail.phoneNumber
-                        ? dialogDetail.detail.phoneNumber
-                        : "Không có dữ liệu"}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="font-medium px-2 py-1">Vai trò</p>
-                    <p className="px-2">
-                      {dialogDetail.detail !== null
-                        ? dialogDetail.detail.roles.map(role => {
-                          if(role === "admin"){
-                            return <Badge className='destructive'>Quản trị viên</Badge>
-                          }else if(role === "user"){
-                            return <Badge>Tài khoản thường</Badge>
-                          }
-                        })
-                        : "No data"}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="font-medium px-2 py-1">Trạng thái</p>
-                    <p className="px-2">
-                      <a
-                        href={
-                          dialogDetail.detail !== null
-                            ? dialogDetail.detail.status
-                            : "No data"
-                        }
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-500 underline"
-                      >
-                        Xem tài liệu
-                      </a>
-                    </p>
-                  </div>
-                  <div className="flex flex-col">
-                    <p className="font-medium px-2 py-1 h-fit">Ngày tạo</p>
-                    <p className="px-2 flex flex-row gap-2">
-                      {dialogDetail.detail !== null
-                        ? new Date(dialogDetail.detail.createdAt).toLocaleDateString("vi-VN")
-                        : "No data"}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="font-medium px-2 py-1">Lần cuối cập nhập</p>
-                    <p className="px-2">
-                      {dialogDetail.detail !== null
-                        ? new Date(dialogDetail.detail.updatedAt).toLocaleDateString("vi-VN")
-                        : "No data"}
-                    </p>
+
+
+                  <div className='flex-1'>
+                    <div>
+                      <p className="font-medium px-2 py-1">Vai trò</p>
+                      <p className="px-2 flex gap-1">
+                        {dialogDetail.detail !== null
+                          ? dialogDetail.detail.roles.map(role => {
+                            if(role === "admin"){
+                              return <Badge className='destructive'>Quản trị viên</Badge>
+                            }else if(role === "user"){
+                              return <Badge>Tài khoản thường</Badge>
+                            }
+                          })
+                          : "No data"}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-medium px-2 py-1">Trạng thái</p>
+                      <p className="px-2">
+                        {dialogDetail.detail?.status === "verifying" && "Chờ kích hoạt"}
+                        {dialogDetail.detail?.status === "active" && "Đã kích hoạt"}
+                        {dialogDetail.detail?.status === "banned" && "Đã bị ban"}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-medium px-2 py-1">Số lần cảnh báo</p>
+                      <p className="px-2">
+                        {dialogDetail.detail !== null
+                          ? dialogDetail.detail.warningCount
+                          : "No data"}
+                      </p>
+                    </div>
+                    <div className="flex flex-col">
+                      <p className="font-medium px-2 py-1 h-fit">Ngày tạo</p>
+                      <p className="px-2 flex flex-row gap-2">
+                        {dialogDetail.detail !== null
+                          ? new Date(dialogDetail.detail.createdAt).toLocaleDateString("vi-VN")
+                          : "No data"}
+                      </p>
+                    </div>
                   </div>
                 </div>
       

@@ -29,18 +29,19 @@ const ShelterEstablishmentRequestsList = () => {
     const {shelterAPI} = useContext(AppContext)
     const [rejectReason, setRejectReason] = useState("");
     const [openRejectDialog, setOpenRejectDialog] = useState(false);
+    const [refresh, setRefresh] = useState<boolean>(false);
     
         useEffect(() => {
           authAxios.get(`${shelterAPI}/get-shelter-requests-list`)
         .then(({data}) => {
-            console.log(data)
+            // console.log(data)
             setShelterRequestData(data);
             setFilteredShelterRequestData(data);
         })
         .catch(error => {
           console.log(error?.response.data.message);
         })
-        }, [])
+        }, [refresh])
     
     
         const columns: ColumnDef<ShelterEstablishmentRequestTableData>[] = [
@@ -141,7 +142,7 @@ const ShelterEstablishmentRequestsList = () => {
                   variant: "outline",
                 };
         
-                return <Badge variant={variant}>{label}</Badge>;
+                return <Badge variant="outline">{label}</Badge>;
               },
             },
         {
@@ -168,8 +169,9 @@ const ShelterEstablishmentRequestsList = () => {
             <Ellipsis  className="h-4 w-4 cursor-pointer"/>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <ShelterDetailDialog shelter={row.original}/>
-            {row.original.status === "verifying" &&
+            {row.original.status !== "verifying" ? 
+              <ShelterDetailDialog shelter={row.original}/>
+            :
           <DropdownMenuItem className="cursor-pointer" onClick={() => {
             setSelectedShelterRequest({
               _id: row.original._id,
@@ -191,7 +193,7 @@ const ShelterEstablishmentRequestsList = () => {
             });
             setIsDialogOpen(true)
           }}>
-             Duyệt
+             Xem yêu cầu
           </DropdownMenuItem>}
           </DropdownMenuContent>
         </DropdownMenu>
@@ -230,23 +232,15 @@ const ShelterEstablishmentRequestsList = () => {
             decision: "approve",
           });
           setTimeout(() => {
-            setButtonLoading(false);
             setSelectedShelterRequest(null);
             setIsDialogOpen(false);
+            setRefresh(prev => !prev)
             toast.success("Duyệt chấp thuận thành công!");
-            authAxios
-              .get(`${shelterAPI}/get-shelter-requests-list`)
-              .then(({ data }) => {
-                // console.log(data)
-                setShelterRequestData(data);
-                setFilteredShelterRequestData(data);
-              })
-              .catch((error) => {
-                console.log(error?.response.data.message);
-              });
-          }, 2000);
+          }, 200);
         } catch (error : any) {
-          console.log(error?.response.data.message);
+          console.log(error?.response.data.message || "Lỗi chấp thuận yêu cầu thành lập trung tâm cứu hộ");
+          toast.error(error?.response.data.message || "Lỗi chấp thuận yêu cầu thành lập trung tâm cứu hộ");
+        } finally{
           setButtonLoading(false);
         }
         
@@ -261,23 +255,15 @@ const ShelterEstablishmentRequestsList = () => {
             rejectReason: rejectReason,
           });
           setTimeout(() => {
-            setButtonLoading(false);
             setSelectedShelterRequest(null);
             setIsDialogOpen(false);
+            setRefresh(prev => !prev)
             toast.success("Duyệt từ chối thành công!");
-            authAxios
-              .get(`${shelterAPI}/get-shelter-requests-list`)
-              .then(({ data }) => {
-                // console.log(data)
-                setShelterRequestData(data);
-                setFilteredShelterRequestData(data);
-              })
-              .catch((error) => {
-                console.log(error?.response.data.message);
-              });
-          }, 2000);
+          }, 200);
         } catch (error : any) {
-          console.log(error?.response.data.message);
+          console.log(error?.response.data.message || "Lỗi từ chối yêu cầu thành lập trung tâm cứu hộ");
+          toast.error(error?.response.data.message || "Lỗi từ chối yêu cầu thành lập trung tâm cứu hộ");
+        } finally{
           setButtonLoading(false);
         }
       }
