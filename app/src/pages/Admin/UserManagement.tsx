@@ -294,6 +294,7 @@ const UserManagement = () => {
                 <Button
                   variant="destructive"
                   className=" mx-auto cursor-pointer w-full"
+                  disabled={isAdmin}
                 >
                   Quản trị <ChevronDown />
                 </Button>
